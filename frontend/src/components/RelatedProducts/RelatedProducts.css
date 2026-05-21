@@ -1,0 +1,105 @@
+/* RelatedProducts.css */
+.relatedproducts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 20px;
+    margin-bottom: 50px;
+}
+
+.relatedproducts h1 {
+    color: #171717;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.relatedproducts hr {
+    width: 200px;
+    height: 4px;
+    border-radius: 10px;
+    background: #ff4141;
+    border: none;
+    margin-bottom: 30px;
+}
+
+.relatedproducts-item {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Item hover effects */
+.relatedproducts-item .Item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.relatedproducts-item .Item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* "View All" button (optional) */
+.relatedproducts-viewall {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: transparent;
+    color: #ff4141;
+    border: 2px solid #ff4141;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.relatedproducts-viewall:hover {
+    background: #ff4141;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .relatedproducts-item {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .relatedproducts {
+        padding: 30px 15px;
+    }
+    
+    .relatedproducts h1 {
+        font-size: 30px;
+    }
+
+    .relatedproducts-item {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .relatedproducts h1 {
+        font-size: 26px;
+    }
+
+    .relatedproducts hr {
+        width: 150px;
+        height: 3px;
+    }
+
+    .relatedproducts-item {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+}

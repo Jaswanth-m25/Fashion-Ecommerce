@@ -1,0 +1,406 @@
+/* --- Global Styling for About Page --- */
+:root {
+    --primary-color: #ff3f6c;
+    --primary-hover: #e02f59;
+    --text-main: #282c3f;
+    --text-light: #686b78;
+    --text-muted: #9496a2;
+    --bg-light: #f5f5f6;
+    --white: #ffffff;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --radius-sm: 4px;
+    --radius-lg: 12px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.about-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Shared Section Headers --- */
+.about-section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+.about-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* --- 1. Hero Section --- */
+.about-hero {
+    background: linear-gradient(rgba(40, 44, 63, 0.75), rgba(40, 44, 63, 0.85)), 
+                url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600') no-repeat center center/cover;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-content p {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease;
+}
+
+/* --- 2. Our Story Section --- */
+.our-story .section-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.section-text p {
+    color: var(--text-light);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.section-image {
+    width: 100%;
+    height: 350px;
+    background: var(--bg-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600');
+    background-size: cover;
+    background-position: center;
+    transition: var(--transition);
+}
+
+.section-image:hover {
+    transform: scale(1.02);
+}
+
+.image-placeholder {
+    font-size: 48px;
+    display: none; /* Hidden since we used real premium placeholder backgrounds */
+}
+
+/* --- 3. Mission, Vision & Values --- */
+.mission-vision {
+    background-color: var(--bg-light);
+    max-width: 100%;
+    padding: 80px 10%;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+    border-top: 4px solid transparent;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-top-color: var(--primary-color);
+}
+
+.value-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.value-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.value-card p {
+    color: var(--text-light);
+    font-size: 14.5px;
+}
+
+/* --- 4. Why Choose Us Section --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
+
+.feature-item:hover {
+    background: var(--bg-light);
+}
+
+.feature-icon {
+    font-size: 28px;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.feature-item h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.feature-item p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* --- 5. Achievements / Statistics --- */
+.statistics {
+    background: var(--text-main);
+    color: var(--white);
+    max-width: 100%;
+    padding: 60px 10%;
+}
+
+.statistics h2 {
+    color: var(--white);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- 6. Product Categories Offerings --- */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.category-card {
+    background: var(--white);
+    border: 1px solid var(--bg-light);
+    padding: 40px 30px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.category-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    border-color: transparent;
+}
+
+.category-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.category-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.category-card p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* --- 7. Call To Action (CTA) --- */
+.cta {
+    max-width: 100%;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+    padding: 80px 20px;
+}
+
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.cta-content h2::after { display: none; } /* Remove bottom line decoration for CTA */
+
+.cta-content p {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 35px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cta-btn {
+    padding: 14px 35px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
+
+.cta-btn.primary {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 63, 108, 0.3);
+}
+
+.cta-btn.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 63, 108, 0.4);
+}
+
+.cta-btn.secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 2px solid var(--text-main);
+}
+
+.cta-btn.secondary:hover {
+    background: var(--text-main);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsive Layout (Mobile Friendly) --- */
+@media (max-width: 992px) {
+    .our-story .section-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .values-grid, .features-grid, .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+    .hero-content h1 { font-size: 40px; }
+}
+
+@media (max-width: 600px) {
+    .about-section {
+        padding: 50px 20px;
+    }
+    .about-section h2 { font-size: 26px; }
+    
+    .values-grid, .features-grid, .categories-grid, .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-content h1 { font-size: 32px; }
+    .hero-content p { font-size: 16px; }
+    
+    .feature-item { padding: 10px 0; }
+    
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .cta-btn {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}

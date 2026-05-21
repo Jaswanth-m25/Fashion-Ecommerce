@@ -1,0 +1,212 @@
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    background: linear-gradient(135deg, #fde1ff 0%, #e1ffea22 60%, #fff9e6 100%);
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 65, 65, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -50px;
+    left: -50px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: 50px;
+    right: 10%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.heroleft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    line-height: 1.1;
+    flex: 1;
+    z-index: 1;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.heroleft h2 {
+    color: #090909;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.heroleft p {
+    color: #171717;
+    font-size: 70px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.hand-hand-icon {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.hand-hand-icon p {
+    font-size: 70px;
+    margin: 0;
+}
+
+.hand-hand-icon img {
+    width: 70px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hero-explore-btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff4141 0%, #ff6b6b 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 65, 65, 0.25);
+    border: none;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+.hero-explore-btn:hover {
+    background: linear-gradient(135deg, #e63939 0%, #ff5252 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 65, 65, 0.35);
+}
+
+.hero-explore-btn:active {
+    transform: translateY(-1px);
+}
+
+.heroright {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.heroright .hero-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding: 50px 5%;
+        gap: 40px;
+    }
+
+    .heroleft {
+        align-items: center;
+        text-align: center;
+    }
+
+    .heroleft p {
+        font-size: 50px;
+    }
+
+    .hand-hand-icon p {
+        font-size: 50px;
+    }
+
+    .hand-hand-icon img {
+        width: 50px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-explore-btn {
+        align-self: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .heroleft p {
+        font-size: 40px;
+    }
+
+    .hand-hand-icon p {
+        font-size: 40px;
+    }
+
+    .hero-explore-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .heroleft h2 {
+        font-size: 22px;
+    }
+}
