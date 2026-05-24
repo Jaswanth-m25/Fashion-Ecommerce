@@ -35,7 +35,7 @@ backend/.env
 frontend/.env
 
 # uploads
-backend/upload/
+# backend/upload/
 
 # logs
 npm-debug.log*
