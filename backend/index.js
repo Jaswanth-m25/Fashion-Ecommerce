@@ -3,18 +3,18 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-const connectDB = require('../config/db');
-const authRoutes = require('../routes/auth');
-const productRoutes = require('../routes/products');
-const adminRoutes = require('../routes/admin');
-const orderRoutes = require('../routes/orders');
-const wishlistRoutes = require('../routes/wishlist');
-const vendorRoutes = require('../routes/vendor');
-const paymentRoutes = require('../routes/payment');
-const trackingRoutes = require('../routes/tracking');
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+const adminRoutes = require('./routes/admin');
+const orderRoutes = require('./routes/orders');
+const wishlistRoutes = require('./routes/wishlist');
+const vendorRoutes = require('./routes/vendor');
+const paymentRoutes = require('./routes/payment');
+const trackingRoutes = require('./routes/tracking');
 
 const app = express();
-// const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 // Connect to MongoDB
 connectDB();
@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-// app.listen(PORT, () => {
-//     console.log(`🚀 Server running at http://localhost:${PORT}`);
-// });
-module.exports = app;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
