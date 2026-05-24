@@ -35,7 +35,7 @@ const AdminProfile = () => {
                 return;
             }
 
-            const res = await fetch('http://localhost:4000/admin/admininfo', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/admininfo', {
                 method: 'GET',
                 headers: {
                     'auth-token': token
@@ -98,7 +98,7 @@ const AdminProfile = () => {
 
         try {
             const token = localStorage.getItem('auth-token');
-            const res = await fetch('http://localhost:4000/admin/updatepassword', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/updatepassword', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

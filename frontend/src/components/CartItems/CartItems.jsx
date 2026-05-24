@@ -36,7 +36,7 @@ const CartItems = () => {
                 action: 'removed'
             });
 
-            const response = await fetch('http://localhost:4000/trackcart', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/trackcart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

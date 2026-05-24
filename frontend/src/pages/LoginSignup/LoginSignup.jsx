@@ -98,7 +98,7 @@ const LoginSignup = () => {
         
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/request-signup-otp', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/request-signup-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ const LoginSignup = () => {
         
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/login', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -199,10 +199,10 @@ const LoginSignup = () => {
             let body = {};
             
             if (otpPurpose === "signup") {
-                endpoint = 'http://localhost:4000/resend-signup-otp';
+                endpoint = 'https://fashion-ecommerce-ak78.onrender.com/resend-signup-otp';
                 body = { email: tempEmail };
             } else {
-                endpoint = 'http://localhost:4000/resend-login-otp';
+                endpoint = 'https://fashion-ecommerce-ak78.onrender.com/resend-login-otp';
                 body = { email: tempEmail };
             }
             
@@ -239,7 +239,7 @@ const LoginSignup = () => {
         
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/signup', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -285,7 +285,7 @@ const LoginSignup = () => {
         
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/verify-login-otp', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/verify-login-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

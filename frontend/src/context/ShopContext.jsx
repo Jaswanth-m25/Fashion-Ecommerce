@@ -9,7 +9,7 @@ const ShopContextProvider =(props)=>{
 
     // Fetch approved products from backend
     useEffect(() => {
-        fetch('http://localhost:4000/allproducts')
+        fetch('https://fashion-ecommerce-ak78.onrender.com/allproducts')
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
@@ -27,7 +27,7 @@ const ShopContextProvider =(props)=>{
 
     useEffect(() => {
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/getwishlist',{
+            fetch('https://fashion-ecommerce-ak78.onrender.com/getwishlist',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -47,7 +47,7 @@ const ShopContextProvider =(props)=>{
         if(localStorage.getItem('auth-token')){
             if (wishlistItems.includes(itemId)) {
                 setWishlistItems((prev) => prev.filter(id => id !== itemId));
-                fetch('http://localhost:4000/removefromwishlist', {
+                fetch('https://fashion-ecommerce-ak78.onrender.com/removefromwishlist', {
                     method:'POST',
                     headers:{
                         Accept:'application/form-data',
@@ -58,7 +58,7 @@ const ShopContextProvider =(props)=>{
                 })
             } else {
                 setWishlistItems((prev) => [...prev, itemId]);
-                fetch('http://localhost:4000/addtowishlist', {
+                fetch('https://fashion-ecommerce-ak78.onrender.com/addtowishlist', {
                     method:'POST',
                     headers:{
                         Accept:'application/form-data',

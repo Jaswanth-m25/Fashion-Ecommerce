@@ -89,7 +89,7 @@ const ForgetPassword = ({ onBackToLogin }) => {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/forgot-password', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/forgot-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ const ForgetPassword = ({ onBackToLogin }) => {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/resend-password-otp', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/resend-password-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ const ForgetPassword = ({ onBackToLogin }) => {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/reset-password', {
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -151,7 +151,7 @@ const Checkout = () => {
 
             const createOrderResponse =
                 await fetch(
-                    'http://localhost:4000/payment/create-order',
+                    'https://fashion-ecommerce-ak78.onrender.com/payment/create-order',
                     {
                         method: 'POST',
 
@@ -254,7 +254,7 @@ const Checkout = () => {
 
                         const verifyResponse =
                             await fetch(
-                                'http://localhost:4000/payment/verify-payment',
+                                'https://fashion-ecommerce-ak78.onrender.com/payment/verify-payment',
                                 {
                                     method: 'POST',
 

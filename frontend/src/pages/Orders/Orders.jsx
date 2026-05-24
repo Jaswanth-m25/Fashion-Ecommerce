@@ -23,7 +23,7 @@ const Orders = () => {
             }
 
             try {
-                const response = await fetch('http://localhost:4000/customer/orders', {
+                const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/customer/orders', {
                     method: 'GET',
                     headers: {
                         Accept: 'application/json',

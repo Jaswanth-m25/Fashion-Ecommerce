@@ -57,7 +57,7 @@ const AdminDashboard = () => {
 
     const fetchOrders = async () => {
         try {
-            const res = await fetch('http://localhost:4000/admin/orders', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/orders', {
                 headers: {
                     'auth-token': localStorage.getItem('auth-token'),
                 },
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
 
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
-            const res = await fetch('http://localhost:4000/updateorderstatus', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/updateorderstatus', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const AdminDashboard = () => {
 
     const updateProductVendor = async (productId, vendorId, vendorName) => {
         try {
-            const res = await fetch('http://localhost:4000/admin/updateproductvendor', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/updateproductvendor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const AdminDashboard = () => {
 
     const fetchUsers = async () => {
         try {
-            const res = await fetch('http://localhost:4000/admin/allusers', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/allusers', {
                 headers: {
                     'auth-token': localStorage.getItem('auth-token'),
                 },
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:4000/admin/approvedproducts', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/approvedproducts', {
                 headers: {
                     'auth-token': localStorage.getItem('auth-token'),
                 },
@@ -142,7 +142,7 @@ const AdminDashboard = () => {
 
     const fetchPendingProducts = async () => {
         try {
-            const res = await fetch('http://localhost:4000/admin/pendingproducts', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/pendingproducts', {
                 headers: {
                     'auth-token': localStorage.getItem('auth-token'),
                 },
@@ -157,7 +157,7 @@ const AdminDashboard = () => {
 
     const handleApproveProduct = async (id, name) => {
         try {
-            const res = await fetch('http://localhost:4000/admin/approveproduct', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/approveproduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ const AdminDashboard = () => {
     const handleRejectProduct = async (id, name) => {
         if (!window.confirm(`Reject and delete product "${name}"? This action cannot be undone.`)) return;
         try {
-            const res = await fetch('http://localhost:4000/admin/rejectproduct', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/rejectproduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ const AdminDashboard = () => {
     const handleDeleteUser = async (userId, name) => {
         if (!window.confirm(`Delete user "${name}"? This will remove all their data and cannot be undone.`)) return;
         try {
-            const res = await fetch('http://localhost:4000/admin/deleteuser', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/deleteuser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
 
     const handleRoleChange = async (userId, newRole) => {
         try {
-            const res = await fetch('http://localhost:4000/admin/updaterole', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/updaterole', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
     const handleRemoveProduct = async (id, name) => {
         if (!window.confirm(`Remove product "${name}"? This action cannot be undone.`)) return;
         try {
-            const res = await fetch('http://localhost:4000/admin/removeproduct', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/removeproduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

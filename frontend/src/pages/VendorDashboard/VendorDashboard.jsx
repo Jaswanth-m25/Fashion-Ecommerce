@@ -86,7 +86,7 @@ const VendorDashboard = () => {
             const token = localStorage.getItem('auth-token');
             if (!token) return;
             
-            const res = await fetch('http://localhost:4000/vendorproducts', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/vendorproducts', {
                 headers: {
                     'auth-token': token,
                 },
@@ -128,7 +128,7 @@ const VendorDashboard = () => {
             const token = localStorage.getItem('auth-token');
             if (!token) return;
             
-            const res = await fetch('http://localhost:4000/vendor/orders', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/vendor/orders', {
                 headers: {
                     'auth-token': token,
                 },
@@ -145,7 +145,7 @@ const VendorDashboard = () => {
 
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
-            const res = await fetch('http://localhost:4000/updateorderstatus', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/updateorderstatus', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ const VendorDashboard = () => {
                 const formDataObj = new FormData();
                 formDataObj.append('product', file);
 
-                const res = await fetch('http://localhost:4000/upload', {
+                const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/upload', {
                     method: 'POST',
                     body: formDataObj,
                 });
@@ -236,7 +236,7 @@ const VendorDashboard = () => {
             return;
         }
 
-        const url = editingId ? 'http://localhost:4000/vendorupdateproduct' : 'http://localhost:4000/vendoraddproduct';
+        const url = editingId ? 'https://fashion-ecommerce-ak78.onrender.com/vendorupdateproduct' : 'https://fashion-ecommerce-ak78.onrender.com/vendoraddproduct';
         
         try {
             const res = await fetch(url, {
@@ -283,7 +283,7 @@ const VendorDashboard = () => {
         if (!window.confirm(`Remove product "${name}"? This action cannot be undone.`)) return;
         
         try {
-            const res = await fetch('http://localhost:4000/vendorremoveproduct', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/vendorremoveproduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

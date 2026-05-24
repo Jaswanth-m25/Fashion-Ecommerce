@@ -37,7 +37,7 @@ const VendorProfile = () => {
                 return;
             }
 
-            const res = await fetch('http://localhost:4000/vendor/vendor-profile', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/vendor/vendor-profile', {
                 headers: {
                     'auth-token': token,
                 },
@@ -94,7 +94,7 @@ const VendorProfile = () => {
                 return;
             }
 
-            const res = await fetch('http://localhost:4000/vendor/update-vendor-profile', {
+            const res = await fetch('https://fashion-ecommerce-ak78.onrender.com/vendor/update-vendor-profile', {
                 method: 'PUT',
                 headers: {
                     'auth-token': token,

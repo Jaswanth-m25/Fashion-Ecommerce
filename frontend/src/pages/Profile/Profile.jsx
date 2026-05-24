@@ -16,7 +16,7 @@ const Profile = () => {
                 return;
             }
 
-            await fetch('http://localhost:4000/getuser', {
+            await fetch('https://fashion-ecommerce-ak78.onrender.com/getuser', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',

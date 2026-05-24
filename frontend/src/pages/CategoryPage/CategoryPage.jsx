@@ -16,7 +16,7 @@ const CategoryPage = () => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:4000/allproducts');
+            const response = await fetch('https://fashion-ecommerce-ak78.onrender.com/allproducts');
             const data = await response.json();
             const filteredProducts = data.filter(product => 
                 product.category === category && product.approved === true

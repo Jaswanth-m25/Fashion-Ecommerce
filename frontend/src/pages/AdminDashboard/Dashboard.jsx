@@ -17,25 +17,25 @@ const Dashboard = ({ stats, analytics, users, products }) => {
                     return;
                 }
 
-                const viewedRes = await fetch('http://localhost:4000/admin/analytics/top-viewed-products', {
+                const viewedRes = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/analytics/top-viewed-products', {
                     headers: { 'auth-token': token }
                 });
                 const viewedData = await viewedRes.json();
                 setTopViewedProducts(viewedData.data || []);
 
-                const cartRes = await fetch('http://localhost:4000/admin/analytics/top-cart-products', {
+                const cartRes = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/analytics/top-cart-products', {
                     headers: { 'auth-token': token }
                 });
                 const cartData = await cartRes.json();
                 setTopCartProducts(cartData.data || []);
 
-                const statsRes = await fetch('http://localhost:4000/admin/analytics/cart-stats', {
+                const statsRes = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/analytics/cart-stats', {
                     headers: { 'auth-token': token }
                 });
                 const statsData = await statsRes.json();
                 setCartStats(statsData.data || {});
 
-                const wishlistRes = await fetch('http://localhost:4000/admin/analytics/wishlist', {
+                const wishlistRes = await fetch('https://fashion-ecommerce-ak78.onrender.com/admin/analytics/wishlist', {
                     headers: { 'auth-token': token }
                 });
                 const wishlistData = await wishlistRes.json();
