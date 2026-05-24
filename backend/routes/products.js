@@ -27,7 +27,7 @@ router.post(
         const image_urls =
             req.files.map((file) => (
 
-                `http://localhost:4000/images/${file.filename}`
+                `https://fashion-ecommerce-ak78.onrender.com/images/${file.filename}`
             ));
 
         res.json({
