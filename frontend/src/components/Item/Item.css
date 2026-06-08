@@ -1,117 +1,127 @@
 .Item {
-    width: 280px;
-    position: relative;
-    transition: all 0.3s ease;
+  width: 280px;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .Item.out-of-stock {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .Item img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    display: block; /* Removes bottom gap */
-    background: #f5f5f5; /* Fallback color */
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  /* Removes bottom gap */
+  background: #f5f5f5;
+  /* Fallback color */
 }
 
 .Item.out-of-stock img {
-    filter: grayscale(50%);
+  filter: grayscale(50%);
 }
 
 .item-discount-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: linear-gradient(135deg, #ff4141 0%, #ff1111 100%);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    z-index: 10;
-    box-shadow: 0 4px 10px rgba(255, 65, 65, 0.3);
-    animation: badgePulse 2s infinite;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #ff4141 0%, #ff1111 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(255, 65, 65, 0.3);
+  animation: badgePulse 2s infinite;
 }
 
 .item-out-of-stock-badge {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    z-index: 15;
-    white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  z-index: 15;
+  white-space: nowrap;
 }
 
 @keyframes badgePulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .item-prices {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-    padding: 0 5px;
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  padding: 0 5px;
 }
 
 .item-price-new {
-    font-size: 18px;
-    font-weight: 600;
-    color: #374151;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
 }
 
 .item-price-old {
-    font-size: 16px;
-    color: #8c8c8c;
-    text-decoration: line-through;
+  font-size: 16px;
+  color: #8c8c8c;
+  text-decoration: line-through;
 }
 
 /* Hover effects */
 .Item:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .Item:hover img {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .item-image-wrapper {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .wishlist-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    font-size: 18px;
-    user-select: none;
-    z-index: 10;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 18px;
+  user-select: none;
+  z-index: 10;
 }
 
 .wishlist-icon:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .wishlist-icon.active {
-    background: #fff0f0;
+  background: #fff0f0;
 }
