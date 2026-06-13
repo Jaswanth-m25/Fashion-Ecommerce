@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { SignUp } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
@@ -9,7 +9,7 @@ const SignUpPage = () => {
         return localStorage.getItem("signup-role") || "customer";
     });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         localStorage.setItem("signup-pending", "true");
         localStorage.setItem("signup-role", role);
     }, [role]);

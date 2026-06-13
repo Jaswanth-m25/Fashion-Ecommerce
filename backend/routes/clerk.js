@@ -7,9 +7,16 @@ const ActivityLog = require('../models/Activity');
 const ADMIN_EMAIL = 'admin@shop.com';
 const VALID_ROLES = ['customer', 'vendor'];
 
+const resolveRole = (role) => {
+    const normalized = typeof role === 'string' ? role.toLowerCase().trim() : '';
+    return VALID_ROLES.includes(normalized) ? normalized : 'customer';
+};
+
 router.post('/sync-user', async (req, res) => {
     try {
-        const { clerkId, name, email, avatar, role, isNewSignup } = req.body;
+        const { clerkId, name, email, role, isNewSignup } = req.body;
+
+        console.log('Clerk sync request:', { clerkId, email, role, isNewSignup });
 
         if (!clerkId || !email) {
             return res.status(400).json({
@@ -18,7 +25,7 @@ router.post('/sync-user', async (req, res) => {
             });
         }
 
-        const signupRole = VALID_ROLES.includes(role) ? role : 'customer';
+        const signupRole = resolveRole(role);
 
         if (email === ADMIN_EMAIL) {
             const token = jwt.sign(
@@ -39,6 +46,7 @@ router.post('/sync-user', async (req, res) => {
         }
 
         let user = await Users.findOne({ clerkId });
+        let isNewUser = false;
 
         if (!user) {
             user = await Users.findOne({ email });
@@ -52,6 +60,7 @@ router.post('/sync-user', async (req, res) => {
                 }
                 await user.save();
             } else {
+                isNewUser = true;
                 const cart = {};
                 for (let i = 0; i < 300; i++) {
                     cart[i] = 0;
@@ -62,7 +71,7 @@ router.post('/sync-user', async (req, res) => {
                     name: name || email.split('@')[0],
                     email,
                     cartData: cart,
-                    role: isNewSignup ? signupRole : 'customer'
+                    role: signupRole
                 });
 
                 await user.save();
@@ -76,7 +85,12 @@ router.post('/sync-user', async (req, res) => {
                 });
                 await activityLog.save();
             }
+        } else if (isNewSignup) {
+            user.role = signupRole;
+            await user.save();
         }
+
+        console.log('Clerk sync saved user:', { email: user.email, role: user.role, isNewUser });
 
         const token = jwt.sign(
             { user: { id: user._id } },

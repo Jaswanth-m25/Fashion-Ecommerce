@@ -49,7 +49,7 @@ function AppRoutes() {
           clerkId: user.id,
           name: user.fullName,
           email: user.primaryEmailAddress?.emailAddress,
-          role: isNewSignup ? signupRole : undefined,
+          role: signupRole,
           isNewSignup
         });
 
