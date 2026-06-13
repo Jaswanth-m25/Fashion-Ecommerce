@@ -5,15 +5,17 @@ import "./LoginSignup.css";
 
 const SignUpPage = () => {
     const navigate = useNavigate();
-    const [role, setRole] = useState("customer");
+    const [role, setRole] = useState(() => {
+        return localStorage.getItem("signup-role") || "customer";
+    });
 
     useEffect(() => {
-        localStorage.setItem("signup-role", "customer");
-    }, []);
+        localStorage.setItem("signup-pending", "true");
+        localStorage.setItem("signup-role", role);
+    }, [role]);
 
     const handleRoleChange = (selectedRole) => {
         setRole(selectedRole);
-        localStorage.setItem("signup-role", selectedRole);
     };
 
     return (
@@ -43,7 +45,10 @@ const SignUpPage = () => {
                     </div>
                 </div>
 
-                <SignUp signInUrl="/LoginSignup" />
+                <SignUp
+                    signInUrl="/LoginSignup"
+                    unsafeMetadata={{ role }}
+                />
 
                 <div className="signup-link">
                     <span>Already have an account? </span>

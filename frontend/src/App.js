@@ -41,19 +41,24 @@ function AppRoutes() {
       setIsSyncing(true);
 
       try {
-        const signupRole = localStorage.getItem('signup-role');
+        const signupRole = localStorage.getItem('signup-role')
+          || user.unsafeMetadata?.role;
+        const isNewSignup = localStorage.getItem('signup-pending') === 'true';
+
         const response = await axios.post(`${API_URL}/clerk/sync-user`, {
           clerkId: user.id,
           name: user.fullName,
           email: user.primaryEmailAddress?.emailAddress,
-          role: signupRole || undefined
+          role: isNewSignup ? signupRole : undefined,
+          isNewSignup
         });
 
         localStorage.setItem('auth-token', response.data.token);
         localStorage.setItem('user-role', response.data.role);
 
-        if (signupRole) {
+        if (isNewSignup) {
           localStorage.removeItem('signup-role');
+          localStorage.removeItem('signup-pending');
         }
       } catch (error) {
         console.error('User sync error:', error);

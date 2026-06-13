@@ -5,10 +5,11 @@ const Users = require('../models/User');
 const ActivityLog = require('../models/Activity');
 
 const ADMIN_EMAIL = 'admin@shop.com';
+const VALID_ROLES = ['customer', 'vendor'];
 
 router.post('/sync-user', async (req, res) => {
     try {
-        const { clerkId, name, email, avatar, role } = req.body;
+        const { clerkId, name, email, avatar, role, isNewSignup } = req.body;
 
         if (!clerkId || !email) {
             return res.status(400).json({
@@ -16,6 +17,8 @@ router.post('/sync-user', async (req, res) => {
                 message: 'clerkId and email are required'
             });
         }
+
+        const signupRole = VALID_ROLES.includes(role) ? role : 'customer';
 
         if (email === ADMIN_EMAIL) {
             const token = jwt.sign(
@@ -41,8 +44,12 @@ router.post('/sync-user', async (req, res) => {
             user = await Users.findOne({ email });
 
             if (user) {
+                const isFirstClerkLink = !user.clerkId;
                 user.clerkId = clerkId;
                 if (name && !user.name) user.name = name;
+                if (isNewSignup && isFirstClerkLink) {
+                    user.role = signupRole;
+                }
                 await user.save();
             } else {
                 const cart = {};
@@ -55,7 +62,7 @@ router.post('/sync-user', async (req, res) => {
                     name: name || email.split('@')[0],
                     email,
                     cartData: cart,
-                    role: role || 'customer'
+                    role: isNewSignup ? signupRole : 'customer'
                 });
 
                 await user.save();

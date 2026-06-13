@@ -1,9 +1,15 @@
 import { SignIn } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "./LoginSignup.css";
 
 const LoginSignup = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.removeItem("signup-role");
+        localStorage.removeItem("signup-pending");
+    }, []);
 
     return (
         <div className="auth-page">
