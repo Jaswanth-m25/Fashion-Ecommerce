@@ -1,11 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   useUser,
   SignedIn,
-  SignedOut,
-  RedirectToSignIn
+  SignedOut
 } from '@clerk/clerk-react';
 import axios from 'axios';
 import Shop from './pages/Shop/Shop';
@@ -24,6 +23,7 @@ import Help from './pages/Help/Help';
 import VendorDashboard from './pages/VendorDashboard/VendorDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import Checkout from './pages/Checkout/Checkout';
+import RoleGuard, { RoleBasedRedirect } from './components/RoleGuard';
 import men_banner from './components/Assets/banner_mens.png'
 import women_banner from './components/Assets/banner_women.png'
 import kid_banner from './components/Assets/banner_kids.png'
@@ -104,7 +104,7 @@ function AppRoutes() {
               <LoginSignup />
             </SignedOut>
             <SignedIn>
-              <Navigate to="/" replace />
+              <RoleBasedRedirect />
             </SignedIn>
           </>
         }
@@ -117,7 +117,7 @@ function AppRoutes() {
               <SignUpPage />
             </SignedOut>
             <SignedIn>
-              <Navigate to="/" replace />
+              <RoleBasedRedirect />
             </SignedIn>
           </>
         }
@@ -127,56 +127,50 @@ function AppRoutes() {
       <Route
         path='/profile'
         element={
-          <>
-            <SignedIn><Profile/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['customer']}>
+            <Profile/>
+          </RoleGuard>
         }
       />
       <Route
         path='/orders'
         element={
-          <>
-            <SignedIn><Orders/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['customer']}>
+            <Orders/>
+          </RoleGuard>
         }
       />
       <Route
         path='/wishlist'
         element={
-          <>
-            <SignedIn><Wishlist/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['customer']}>
+            <Wishlist/>
+          </RoleGuard>
         }
       />
       <Route path='/search' element={<Search/>} />
       <Route
         path='/vendor'
         element={
-          <>
-            <SignedIn><VendorDashboard/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['vendor']}>
+            <VendorDashboard/>
+          </RoleGuard>
         }
       />
       <Route
         path='/admin'
         element={
-          <>
-            <SignedIn><AdminDashboard/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['admin']}>
+            <AdminDashboard/>
+          </RoleGuard>
         }
       />
       <Route
         path='/checkout'
         element={
-          <>
-            <SignedIn><Checkout/></SignedIn>
-            <SignedOut><RedirectToSignIn /></SignedOut>
-          </>
+          <RoleGuard allowedRoles={['customer']}>
+            <Checkout/>
+          </RoleGuard>
         }
       />
     </Routes>

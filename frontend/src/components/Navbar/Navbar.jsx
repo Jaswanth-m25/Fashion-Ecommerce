@@ -351,17 +351,32 @@ const Navbar = () => {
 
                                 <div className="user-dropdown-menu">
 
-                                    <Link to="/profile">
-                                        📱 My Profile
-                                    </Link>
+                                    {userRole === 'customer' && (
+                                        <>
+                                            <Link to="/profile">
+                                                📱 My Profile
+                                            </Link>
+                                            <Link to="/orders">
+                                                📦 Orders
+                                            </Link>
+                                            <Link to="/wishlist">
+                                                ❤️ Wishlist
+                                            </Link>
+                                        </>
+                                    )}
 
-                                    <Link to="/orders">
-                                        📦 Orders
-                                    </Link>
+                                    {userRole === 'vendor' && (
+                                        <Link to="/vendor">
+                                            🏪 Vendor Panel
+                                        </Link>
+                                    )}
 
-                                    <Link to="/wishlist">
-                                        ❤️ Wishlist
-                                    </Link>
+                                    {userRole === 'admin' && (
+                                        <Link to="/admin">
+                                            🛡️ Admin Panel
+                                        </Link>
+                                    )}
+
                                     <Link to="/help">
                                         ❓ Help
                                     </Link>
