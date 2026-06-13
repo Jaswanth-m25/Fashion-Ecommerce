@@ -1,11 +1,20 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  useUser,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn
+} from '@clerk/clerk-react';
+import axios from 'axios';
 import Shop from './pages/Shop/Shop';
 import ShopCategory from './pages/ShopCategory/ShopCategory';
 import AllProducts from './pages/AllProducts/AllProducts';
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import LoginSignup from './pages/LoginSignup/LoginSignup';
+import SignUpPage from './pages/LoginSignup/SignUp';
 import Profile from './pages/Profile/Profile';
 import Orders from './pages/Orders/Orders';
 import Wishlist from './pages/Wishlist/Wishlist';
@@ -19,31 +28,166 @@ import men_banner from './components/Assets/banner_mens.png'
 import women_banner from './components/Assets/banner_women.png'
 import kid_banner from './components/Assets/banner_kids.png'
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://fashion-ecommerce-ak78.onrender.com';
+
+function AppRoutes() {
+  const { user, isSignedIn, isLoaded } = useUser();
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  useEffect(() => {
+    const syncUser = async () => {
+      if (!user) return;
+
+      setIsSyncing(true);
+
+      try {
+        const signupRole = localStorage.getItem('signup-role');
+        const response = await axios.post(`${API_URL}/clerk/sync-user`, {
+          clerkId: user.id,
+          name: user.fullName,
+          email: user.primaryEmailAddress?.emailAddress,
+          role: signupRole || undefined
+        });
+
+        localStorage.setItem('auth-token', response.data.token);
+        localStorage.setItem('user-role', response.data.role);
+
+        if (signupRole) {
+          localStorage.removeItem('signup-role');
+        }
+      } catch (error) {
+        console.error('User sync error:', error);
+      } finally {
+        setIsSyncing(false);
+      }
+    };
+
+    if (isSignedIn) {
+      syncUser();
+    } else {
+      localStorage.removeItem('auth-token');
+      localStorage.removeItem('user-role');
+      setIsSyncing(false);
+    }
+  }, [isSignedIn, user]);
+
+  if (!isLoaded || (isSignedIn && isSyncing)) {
+    return (
+      <div style={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '1.2rem'
+      }}>
+        Loading...
+      </div>
+    );
+  }
+
+  return (
+    <Routes>
+      <Route path='/' element={<Shop />} />
+      <Route path='/all-products' element={<AllProducts />} />
+      <Route path='/mens' element={<ShopCategory banner={men_banner} category="men" />} />
+      <Route path='/womens' element={<ShopCategory banner={women_banner} category="women" />} />
+      <Route path='/kids' element={<ShopCategory banner={kid_banner} category="kid" />} />
+      <Route path='/product' element={<Product />}>
+        <Route path=':productId' element={<Product />} />
+      </Route>
+      <Route path='/cart' element={<Cart/>} />
+      <Route
+        path='/LoginSignup'
+        element={
+          <>
+            <SignedOut>
+              <LoginSignup />
+            </SignedOut>
+            <SignedIn>
+              <Navigate to="/" replace />
+            </SignedIn>
+          </>
+        }
+      />
+      <Route
+        path='/signup'
+        element={
+          <>
+            <SignedOut>
+              <SignUpPage />
+            </SignedOut>
+            <SignedIn>
+              <Navigate to="/" replace />
+            </SignedIn>
+          </>
+        }
+      />
+      <Route path='/about' element={<About/>} />
+      <Route path='/help' element={<Help/>} />
+      <Route
+        path='/profile'
+        element={
+          <>
+            <SignedIn><Profile/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+      <Route
+        path='/orders'
+        element={
+          <>
+            <SignedIn><Orders/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+      <Route
+        path='/wishlist'
+        element={
+          <>
+            <SignedIn><Wishlist/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+      <Route path='/search' element={<Search/>} />
+      <Route
+        path='/vendor'
+        element={
+          <>
+            <SignedIn><VendorDashboard/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+      <Route
+        path='/admin'
+        element={
+          <>
+            <SignedIn><AdminDashboard/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+      <Route
+        path='/checkout'
+        element={
+          <>
+            <SignedIn><Checkout/></SignedIn>
+            <SignedOut><RedirectToSignIn /></SignedOut>
+          </>
+        }
+      />
+    </Routes>
+  );
+}
+
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Shop />} />
-          <Route path='/all-products' element={<AllProducts />} />
-          <Route path='/mens' element={<ShopCategory banner={men_banner} category="men" />} />
-          <Route path='/womens' element={<ShopCategory banner={women_banner} category="women" />} />
-          <Route path='/kids' element={<ShopCategory banner={kid_banner} category="kid" />} />
-          <Route path='/product' element={<Product />}>
-            <Route path=':productId' element={<Product />} />
-          </Route>
-          <Route path='/cart' element={<Cart/>} />
-          <Route path='/LoginSignup' element={<LoginSignup/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/help' element={<Help/>} />
-          <Route path='/profile' element={<Profile/>} />
-          <Route path='/orders' element={<Orders/>} />
-          <Route path='/wishlist' element={<Wishlist/>} />
-          <Route path='/search' element={<Search/>} />
-          <Route path='/vendor' element={<VendorDashboard/>} />
-          <Route path='/admin' element={<AdminDashboard/>} />
-          <Route path='/checkout' element={<Checkout/>} />
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </div>
   );

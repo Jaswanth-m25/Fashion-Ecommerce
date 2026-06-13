@@ -10,6 +10,7 @@ import './Navbar.css';
 import logo from '../Assets/logo.png';
 
 import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 import { ShopContext } from '../../context/ShopContext';
 
@@ -18,6 +19,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [searchParams] = useSearchParams();
+    const { isSignedIn, signOut } = useAuth();
     
     const isAdminRoute = location.pathname.startsWith('/admin');
     const adminTab = searchParams.get('tab') || 'dashboard';
@@ -40,7 +42,7 @@ const Navbar = () => {
 
     const userRole = localStorage.getItem('user-role');
 
-    const isLoggedIn = !!localStorage.getItem('auth-token');
+    const isLoggedIn = isSignedIn;
 
     /* =========================
        MENU DATA
@@ -166,15 +168,11 @@ const Navbar = () => {
        LOGOUT
     ========================= */
 
-    const handleLogout = () => {
-
+    const handleLogout = async () => {
         localStorage.removeItem('auth-token');
-
         localStorage.removeItem('user-role');
-
+        await signOut();
         navigate('/');
-
-        window.location.reload();
     };
 
     /* =========================

@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
+const clerkRoutes = require('./routes/clerk');
 const productRoutes = require('./routes/products');
 const adminRoutes = require('./routes/admin');
 const orderRoutes = require('./routes/orders');
@@ -28,6 +29,7 @@ app.use('/images', express.static('upload/images'));
 
 // Routes
 app.use('/', authRoutes);
+app.use('/clerk', clerkRoutes);
 app.use('/', productRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', orderRoutes);

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './AdminNavbar.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 const AdminNavbar = ({ activeTab, onTabChange }) => {
     const navigate = useNavigate();
+    const { signOut } = useAuth();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -16,11 +18,11 @@ const AdminNavbar = ({ activeTab, onTabChange }) => {
         // { id: 'profile', label: 'Profile', icon: '' }
     ];
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         localStorage.removeItem('auth-token');
         localStorage.removeItem('user-role');
+        await signOut();
         navigate('/LoginSignup');
-        window.location.reload();
     };
 
     const handleProfileClick = () => {

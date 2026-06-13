@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
 
+    clerkId: {
+        type: String,
+        unique: true,
+        sparse: true
+    },
+
     name: String,
 
     email: {
@@ -9,7 +15,10 @@ const UserSchema = new mongoose.Schema({
         unique: true
     },
 
-    password: String,
+    password: {
+        type: String,
+        required: false
+    },
 
     cartData: Object,
 

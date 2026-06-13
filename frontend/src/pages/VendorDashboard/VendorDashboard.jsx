@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import './VendorDashboard.css';
 import AddProduct from './AddProduct';
 import ManageProducts from './ManageProducts';
@@ -9,6 +10,7 @@ import VendorProfile from './VendorProfile';
 
 const VendorDashboard = () => {
     const navigate = useNavigate();
+    const { signOut } = useAuth();
     const [activeTab, setActiveTab] = useState('add');
     
     // Form State
@@ -397,11 +399,13 @@ const VendorDashboard = () => {
         return { totalValue, avgDiscount, approvedCount };
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         if (window.confirm('Are you sure you want to logout?')) {
             localStorage.removeItem('auth-token');
+            localStorage.removeItem('user-role');
             localStorage.removeItem('userEmail');
-            navigate('/loginSignup');
+            await signOut();
+            navigate('/LoginSignup');
         }
     };
 

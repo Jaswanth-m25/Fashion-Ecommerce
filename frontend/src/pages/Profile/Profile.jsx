@@ -3,10 +3,12 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
+    const { signOut } = useAuth();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -72,9 +74,11 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <button className="logout-btn-large" onClick={() => {
+                <button className="logout-btn-large" onClick={async () => {
                     localStorage.removeItem('auth-token');
-                    window.location.replace("/");
+                    localStorage.removeItem('user-role');
+                    await signOut();
+                    navigate('/');
                 }}>
                     Log Out
                 </button>

@@ -6,6 +6,71 @@
     box-sizing: border-box;
 }
 
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brand h1 {
+    color: #1a1a1a;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.cl-footer {
+    display: none !important;
+}
+
+.signup-link {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 15px;
+}
+
+.signup-link span {
+    color: #555;
+}
+
+.signup-link button {
+    background: none;
+    border: none;
+    color: #ff4141;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.signup-link button:hover {
+    text-decoration: underline;
+}
+
 .loginsignup {
     width: 100%;
     min-height: 100vh;
