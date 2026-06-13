@@ -46,8 +46,11 @@ const SignUpPage = () => {
                 </div>
 
                 <SignUp
+                    routing="path"
+                    path="/signup"
                     signInUrl="/LoginSignup"
                     unsafeMetadata={{ role }}
+                    fallbackRedirectUrl="/LoginSignup"
                 />
 
                 <div className="signup-link">

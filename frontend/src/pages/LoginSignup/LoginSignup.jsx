@@ -22,6 +22,7 @@ const LoginSignup = () => {
                     routing="path"
                     path="/LoginSignup"
                     signUpUrl="/signup"
+                    fallbackRedirectUrl="/"
                 />
 
                 <div className="signup-link">

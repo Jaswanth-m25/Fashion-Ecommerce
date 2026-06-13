@@ -1,12 +1,6 @@
 import './App.css';
-import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {
-  useUser,
-  SignedIn,
-  SignedOut
-} from '@clerk/clerk-react';
-import axios from 'axios';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import Shop from './pages/Shop/Shop';
 import ShopCategory from './pages/ShopCategory/ShopCategory';
 import AllProducts from './pages/AllProducts/AllProducts';
@@ -24,72 +18,12 @@ import VendorDashboard from './pages/VendorDashboard/VendorDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import Checkout from './pages/Checkout/Checkout';
 import RoleGuard, { RoleBasedRedirect } from './components/RoleGuard';
+import { AuthProvider } from './context/AuthContext';
 import men_banner from './components/Assets/banner_mens.png'
 import women_banner from './components/Assets/banner_women.png'
 import kid_banner from './components/Assets/banner_kids.png'
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://fashion-ecommerce-ak78.onrender.com';
-
 function AppRoutes() {
-  const { user, isSignedIn, isLoaded } = useUser();
-  const [isSyncing, setIsSyncing] = useState(false);
-
-  useEffect(() => {
-    const syncUser = async () => {
-      if (!user) return;
-
-      setIsSyncing(true);
-
-      try {
-        const signupRole = localStorage.getItem('signup-role')
-          || user.unsafeMetadata?.role;
-        const isNewSignup = localStorage.getItem('signup-pending') === 'true';
-
-        const response = await axios.post(`${API_URL}/clerk/sync-user`, {
-          clerkId: user.id,
-          name: user.fullName,
-          email: user.primaryEmailAddress?.emailAddress,
-          role: signupRole,
-          isNewSignup
-        });
-
-        localStorage.setItem('auth-token', response.data.token);
-        localStorage.setItem('user-role', response.data.role);
-
-        if (isNewSignup) {
-          localStorage.removeItem('signup-role');
-          localStorage.removeItem('signup-pending');
-        }
-      } catch (error) {
-        console.error('User sync error:', error);
-      } finally {
-        setIsSyncing(false);
-      }
-    };
-
-    if (isSignedIn) {
-      syncUser();
-    } else {
-      localStorage.removeItem('auth-token');
-      localStorage.removeItem('user-role');
-      setIsSyncing(false);
-    }
-  }, [isSignedIn, user]);
-
-  if (!isLoaded || (isSignedIn && isSyncing)) {
-    return (
-      <div style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '1.2rem'
-      }}>
-        Loading...
-      </div>
-    );
-  }
-
   return (
     <Routes>
       <Route path='/' element={<Shop />} />
@@ -102,7 +36,7 @@ function AppRoutes() {
       </Route>
       <Route path='/cart' element={<Cart/>} />
       <Route
-        path='/LoginSignup'
+        path='/LoginSignup/*'
         element={
           <>
             <SignedOut>
@@ -115,7 +49,7 @@ function AppRoutes() {
         }
       />
       <Route
-        path='/signup'
+        path='/signup/*'
         element={
           <>
             <SignedOut>
@@ -186,7 +120,9 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <AppRoutes />
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
